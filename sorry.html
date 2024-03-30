@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Apology Page</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      position: relative; /* Ensure the body is positioned relative for absolute positioning */
+      background-color: black; /* Change background color to black */
+      color: white; /* Change text color to white */
+    }
+    #buttonContainer {
+      display: flex;
+      justify-content: center; /* Center the buttons horizontally */
+      align-items: flex-start; /* Align buttons to the top of the container */
+      flex-direction: column; /* Arrange buttons vertically */
+      margin-top: 20px; /* Add some margin between the message and buttons */
+    }
+    #noButton {
+      position: absolute; /* Position the "No" button absolutely within the body */
+      transition: left 0.5s, top 0.5s; /* Add transition for smooth movement */
+    }
+    #yesButton {
+      transition: transform 0.5s; /* Add transition for button scaling */
+    }
+    #message {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    img {
+      position: absolute; /* Position the image absolutely within the body */
+      top: 50px; /* Position the image 50px from the top */
+      left: 50%; /* Position the image at the horizontal center */
+      transform: translateX(-50%); /* Center the image horizontally */
+      max-width: 200px; /* Set maximum width for the image */
+      height: auto;
+      transition: transform 0.5s; /* Add transition for image animation */
+    }
+    @keyframes shake {
+      0% { transform: translate(0); }
+      25% { transform: translate(-5px, -5px); }
+      50% { transform: translate(5px, 5px); }
+      75% { transform: translate(-5px, 5px); }
+      100% { transform: translate(5px, -5px); }
+    }
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="message">
+    <h1>Apology</h1>
+    <p>CHODEN I'm sorry for what ignorning u making u upset,I didnt do it intentionally.</p>
+  </div>
+
+  <img id="sadImage" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDdocWU3eXBvazBxMGRhMXhicGFqdXd2bHY4bXNjZ2x0ZTJrOHkwNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9JLOGsEfPjpR1179HE/giphy.gif" alt="Sad Image">
+
+  <div id="buttonContainer">
+    <button id="noButton" onclick="moveNoButton()">No</button>
+    <button id="yesButton" onclick="redirectToNewPage()">Yes</button>
+  </div>
+
+  <script>
+    function moveNoButton() {
+      var button = document.getElementById('noButton');
+      var windowWidth = window.innerWidth - button.clientWidth;
+      var windowHeight = window.innerHeight - button.clientHeight;
+
+      var newLeft = Math.random() * windowWidth;
+      var newTop = Math.random() * windowHeight;
+
+      button.style.left = newLeft + 'px';
+      button.style.top = newTop + 'px';
+
+      var sadImage = document.getElementById('sadImage');
+      sadImage.src = sadImage.src; // Force reload the image to replay the animation
+      sadImage.classList.add('shake'); // Add shake animation class
+      setTimeout(function() {
+        sadImage.classList.remove('shake'); // Remove shake animation class after animation completes
+      }, 500); // Duration of the shake animation
+    }
+
+    function redirectToNewPage() {
+      var yesButton = document.getElementById('yesButton');
+      yesButton.style.transform = 'scale(0)';
+      setTimeout(function() {
+        window.location.href = 'message.html';
+      }, 500); // Delay matches the button's transition duration
+    }
+  </script>
+</body>
+</html>
